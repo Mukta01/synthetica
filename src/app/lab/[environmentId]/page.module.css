@@ -1,0 +1,225 @@
+/* ============================================
+   SYNTHETICA — Environment Page Styles
+   ============================================ */
+
+.container {
+  position: relative;
+  z-index: var(--z-base);
+  min-height: 100vh;
+  padding: var(--space-lg);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.envBg {
+  position: fixed;
+  inset: 0;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.error {
+  color: var(--accent-red);
+  font-family: var(--font-mono);
+  text-align: center;
+  margin: var(--space-2xl) 0;
+}
+
+/* ---- Header ---- */
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.backBtn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  background: transparent;
+}
+
+.backBtn:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.headerCenter {
+  text-align: center;
+  flex: 1;
+}
+
+.envIcon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.envName {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--text-primary);
+}
+
+.envDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.envStats {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* ---- Puzzle Grid ---- */
+.puzzleGrid {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.puzzleCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: rgba(12, 18, 33, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.puzzleCard:hover {
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-elevated);
+}
+
+.puzzleCard.completed {
+  border-left: 3px solid var(--accent-green);
+}
+
+/* ---- Puzzle Number ---- */
+.puzzleNumber {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ---- Puzzle Info ---- */
+.puzzleInfo {
+  flex: 1;
+}
+
+.puzzleName {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.puzzleDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+
+.puzzleMeta {
+  display: flex;
+  gap: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.difficulty {
+  font-weight: 600;
+}
+
+.budget, .traits {
+  color: var(--text-muted);
+}
+
+/* ---- Score ---- */
+.puzzleScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 80px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  font-size: 14px;
+}
+
+.star {
+  transition: opacity var(--transition-fast);
+}
+
+.scoreValue {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.incomplete {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  color: var(--text-muted);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .puzzleCard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .puzzleMeta {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

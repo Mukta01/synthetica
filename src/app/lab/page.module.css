@@ -1,0 +1,306 @@
+/* ============================================
+   SYNTHETICA — Lab Selector Styles
+   ============================================ */
+
+.container {
+  position: relative;
+  z-index: var(--z-base);
+  min-height: 100vh;
+  padding: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.backButton,
+.leaderboardButton {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  background: transparent;
+}
+
+.backButton:hover,
+.leaderboardButton:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+}
+
+.headerCenter {
+  text-align: center;
+}
+
+.headerTitle {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+.headerSubtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* ---- Stats Bar ---- */
+.statsBar {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(12, 18, 33, 0.6);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.statValue {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+/* ---- Environment Cards ---- */
+.environments {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.envCard {
+  position: relative;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  min-height: 380px;
+}
+
+.envCard:not(.locked):hover {
+  border-color: var(--border-active);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.envBg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+}
+
+.envContent {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  height: 100%;
+}
+
+.envHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.envIcon {
+  font-size: 40px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.envName {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--text-primary);
+}
+
+.envConditions {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.envDescription {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.envLore {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+  padding: var(--space-sm) var(--space-md);
+  border-left: 2px solid var(--border-default);
+  margin-top: auto;
+}
+
+/* ---- Progress ---- */
+.envProgress {
+  margin-top: var(--space-sm);
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-xs);
+}
+
+.progressLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.progressBar {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease-out;
+  min-width: 0;
+}
+
+/* ---- Puzzle Dots ---- */
+.puzzlePreview {
+  display: flex;
+  gap: 8px;
+  margin-top: var(--space-sm);
+}
+
+.puzzleDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-default);
+  transition: all var(--transition-fast);
+}
+
+.puzzleDotCompleted {
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* ---- Lock Overlay ---- */
+.locked {
+  pointer-events: none;
+}
+
+.lockOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 19, 0.85);
+  backdrop-filter: blur(4px);
+  gap: var(--space-md);
+}
+
+.lockIcon {
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.lockText {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 1px;
+  max-width: 250px;
+}
+
+/* ---- Hover Arrow ---- */
+.envArrow {
+  position: absolute;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 24px;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all var(--transition-normal);
+  z-index: 1;
+}
+
+.envCard:not(.locked):hover .envArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .environments {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .statsBar {
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .statValue {
+    font-size: 22px;
+  }
+
+  .envContent {
+    padding: var(--space-md);
+  }
+}

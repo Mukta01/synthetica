@@ -1,0 +1,173 @@
+/* ============================================
+   SYNTHETICA — Protein Preview Styles
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: rgba(12, 18, 33, 0.6);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  height: 100%;
+}
+
+.title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* ---- Section ---- */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-default);
+  padding-bottom: var(--space-xs);
+}
+
+/* ---- Amino Acid Chain ---- */
+.aaChain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.aaBubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 6px;
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+  min-width: 36px;
+}
+
+.aaShort {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.aaName {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  opacity: 0.7;
+  margin-top: 1px;
+}
+
+.noData {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ---- Traits ---- */
+.traits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.traitRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.traitHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.traitName {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.traitValue {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.traitMet {
+  color: var(--accent-green);
+}
+
+.traitNotMet {
+  color: var(--accent-amber);
+}
+
+.traitBar {
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  overflow: visible;
+  position: relative;
+}
+
+.traitFill {
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.traitRequired {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--accent-red);
+  border-radius: 1px;
+  z-index: 1;
+}
+
+.traitRequiredLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* ---- Composition ---- */
+.composition {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.compRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.compLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.compValue {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}

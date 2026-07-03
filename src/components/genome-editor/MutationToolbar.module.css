@@ -1,0 +1,198 @@
+/* ============================================
+   SYNTHETICA — Mutation Toolbar Styles
+   ============================================ */
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: rgba(12, 18, 33, 0.6);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* ---- Tool Group ---- */
+.toolGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.groupLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.tools {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* ---- Tool Button ---- */
+.toolBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.toolBtn:hover:not(:disabled) {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan-dim);
+}
+
+.toolBtn.active {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+}
+
+.toolBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.toolIcon {
+  font-size: 14px;
+}
+
+.toolLabel {
+  font-weight: 600;
+}
+
+.toolShortcut {
+  font-size: 9px;
+  color: var(--text-muted);
+  padding: 1px 5px;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  margin-left: 4px;
+}
+
+/* ---- History Buttons ---- */
+.historyBtn,
+.resetBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.historyBtn:hover:not(:disabled),
+.resetBtn:hover {
+  color: var(--text-secondary);
+  border-color: var(--border-active);
+}
+
+.historyBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.resetBtn {
+  color: var(--accent-red-dim);
+  border-color: rgba(255, 51, 102, 0.2);
+}
+
+.resetBtn:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red-dim);
+}
+
+/* ---- Compile Button ---- */
+.compileSection {
+  margin-top: var(--space-sm);
+}
+
+.compileBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 14px var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-green) 100%);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  animation: compile-glow 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes compile-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.4), 0 0 60px rgba(0, 229, 255, 0.1);
+  }
+}
+
+.compileBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.compileBtn.compiling {
+  background: var(--bg-elevated);
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan-dim);
+  animation: none;
+}
+
+.compileIcon {
+  font-size: 18px;
+}
+
+.compileShortcut {
+  font-size: 9px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+  margin-left: var(--space-sm);
+}
+
+/* ---- Spinner ---- */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--accent-cyan-dim);
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

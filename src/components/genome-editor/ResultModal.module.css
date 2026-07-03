@@ -1,0 +1,270 @@
+/* ============================================
+   SYNTHETICA — Result Modal Styles
+   ============================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 19, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.modal {
+  width: 90%;
+  max-width: 520px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.modal.success {
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.08), var(--shadow-elevated);
+}
+
+.modal.failure {
+  border-color: rgba(255, 51, 102, 0.3);
+  box-shadow: 0 0 40px rgba(255, 51, 102, 0.08), var(--shadow-elevated);
+}
+
+/* ---- Header ---- */
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.successIcon,
+.failIcon {
+  font-size: 48px;
+  margin-bottom: var(--space-sm);
+}
+
+.title {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--accent-green);
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.titleFail {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--accent-red);
+  text-shadow: 0 0 20px rgba(255, 51, 102, 0.3);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ---- Stars ---- */
+.starsRow {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.star {
+  font-size: 36px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+/* ---- Score ---- */
+.scoreSection {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.scoreLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.scoreValue {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+/* ---- Stats ---- */
+.statsGrid {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.statVal {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.statLbl {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+/* ---- Trait Results ---- */
+.traitResults {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.traitRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.traitRow.traitFailed {
+  background: rgba(255, 51, 102, 0.05);
+}
+
+.traitCheck {
+  font-size: 14px;
+  width: 20px;
+  text-align: center;
+  color: var(--accent-green);
+}
+
+.traitFailed .traitCheck {
+  color: var(--accent-red);
+}
+
+.traitName {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.traitLevel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ---- Failure Details ---- */
+.failureDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 51, 102, 0.05);
+  border: 1px solid rgba(255, 51, 102, 0.15);
+  border-radius: var(--radius-md);
+}
+
+.failPoint,
+.failReason {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.failLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--accent-red);
+}
+
+.failValue {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.failReasonText {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ---- Actions ---- */
+.actions {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.primaryBtn {
+  flex: 1;
+  padding: 12px var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.primaryBtn:hover {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.secondaryBtn {
+  flex: 1;
+  padding: 12px var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.secondaryBtn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-active);
+}

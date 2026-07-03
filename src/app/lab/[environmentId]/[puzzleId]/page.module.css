@@ -1,0 +1,203 @@
+/* ============================================
+   SYNTHETICA — Puzzle Game Page Styles
+   ============================================ */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  z-index: var(--z-base);
+}
+
+.envBg {
+  position: fixed;
+  inset: 0;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--space-lg);
+  font-family: var(--font-mono);
+  color: var(--accent-red);
+}
+
+/* ---- Top Bar ---- */
+.topBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-default);
+  background: rgba(6, 10, 19, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.backBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  background: transparent;
+}
+
+.backBtn:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.topBarCenter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.envBadge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+}
+
+.puzzleTitle {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.offlineTag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--accent-amber);
+  padding: 4px 10px;
+  background: rgba(255, 170, 0, 0.08);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Main Layout ---- */
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 300px 1fr 280px;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  min-height: calc(100vh - 60px);
+  align-items: start;
+}
+
+/* ---- Left Panel ---- */
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: sticky;
+  top: var(--space-md);
+}
+
+/* ---- Center Panel ---- */
+.centerPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.editorWrapper {
+  background: rgba(12, 18, 33, 0.7);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.editorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(15, 23, 42, 0.8);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.editorLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+.editorDots {
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.editorWrapper > :last-child {
+  padding: var(--space-lg);
+}
+
+.descriptionPanel {
+  padding: var(--space-md);
+  background: rgba(12, 18, 33, 0.4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.descriptionText {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ---- Right Panel ---- */
+.rightPanel {
+  position: sticky;
+  top: var(--space-md);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 280px 1fr;
+  }
+  .rightPanel {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .leftPanel {
+    position: static;
+  }
+}

@@ -1,0 +1,219 @@
+/* ============================================
+   SYNTHETICA — Sequence Editor Styles
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ---- Sequence Row ---- */
+.sequenceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.rowLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  min-width: 70px;
+  text-align: right;
+}
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: relative;
+}
+
+/* ---- Ghost Tile (Original) ---- */
+.ghostTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 32px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.4;
+  position: relative;
+}
+
+.codonSep {
+  position: absolute;
+  right: -4px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: var(--border-default);
+}
+
+/* ---- Editable Tile ---- */
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 52px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: default;
+  position: relative;
+  transition: border-color var(--transition-fast);
+  user-select: none;
+}
+
+.tile.interactive {
+  cursor: pointer;
+}
+
+.tile.interactive:hover {
+  border-color: var(--nuc-color, var(--border-active));
+  box-shadow: 0 0 12px var(--nuc-color, transparent);
+  background: var(--bg-elevated);
+}
+
+.tile.selected {
+  border-width: 2px;
+  box-shadow: 0 0 16px var(--nuc-color, var(--accent-cyan));
+  background: var(--bg-elevated);
+}
+
+.tile.changed {
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.tile.changed::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--nuc-color, var(--accent-cyan));
+  opacity: 0.7;
+}
+
+.tileNuc {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tileIndex {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.selectionGlow {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-md);
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.codonBracket {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-default);
+  opacity: 0.3;
+}
+
+/* ---- Nucleotide Picker ---- */
+.picker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+}
+
+.pickerLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+.pickerOptions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.pickerBtn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--bg-surface);
+  border: 1.5px solid;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+/* ---- Mutation Counter ---- */
+.mutationCounter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+}
+
+.counterLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  min-width: 70px;
+  text-align: right;
+}
+
+.counterBar {
+  flex: 1;
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.counterFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.counterValue {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  min-width: 40px;
+}
+
+.counterValue.exhausted {
+  color: var(--accent-red);
+}
