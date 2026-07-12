@@ -1,42 +1,61 @@
-# 🧬 Synthetica
+<div align="center">
+  <h1>🧬 Synthetica</h1>
+  <p><strong>A browser-based bioinformatics puzzle game built with Next.js and Flask</strong></p>
+</div>
 
-Synthetica is an interactive, browser-based bioinformatics puzzle game. Players take on the role of a genetic engineer, synthesizing custom DNA sequences to create proteins that can survive in extreme alien environments. 
+<br />
 
-## 🏗️ Architecture
+Synthetica is an interactive, educational puzzle game where players take on the role of a genetic engineer. By synthesizing custom DNA sequences, players design proteins capable of surviving in extreme, simulated alien environments. 
 
-Synthetica is built on a modern, containerized full-stack architecture:
+## ✨ Key Features
 
-- **Frontend:** Next.js (App Router), React, TypeScript, Zustand, Framer Motion
-- **Backend:** Python, Flask, SQLAlchemy, pg8000
-- **Database:** PostgreSQL Flexible Server
-- **Infrastructure:** Microsoft Azure (Container Apps, Container Registry)
+- **Real-Time DNA Translation Engine:** Client-side evaluation translates DNA codons into amino acid chains in real time, calculating molecular traits like heat stability, hydrophobicity, and toxin resistance.
+- **Interactive Genome Editor:** A drag-and-drop terminal interface to mutate DNA bases, visualize resulting proteins, and review biochemical properties via an interactive Codex.
+- **Dynamic Environmental Puzzles:** Players must optimize their genetic sequences against strict environmental constraints (e.g., Deep Sea Vents, Acid Pools) with limited mutation budgets.
+- **Global Leaderboards:** Competitive scoring based on mutation efficiency and execution time, persisted securely via a cloud database.
 
-## 🎮 Features
+## 🏗️ Architecture & Tech Stack
 
-- **DNA Translation Engine:** Real-time client-side and server-side translation of DNA codons into amino acid sequences.
-- **Environmental Puzzles:** Various environments (e.g., Deep Sea Vents, Acid Pools) with unique survival requirements (Heat Stability, Hydrophobicity, Toxin Resistance).
-- **Interactive Genome Editor:** A drag-and-drop/click interface to mutate DNA bases in real-time.
-- **Global Leaderboards:** Competitive scoring based on mutation efficiency and time taken, stored securely in a PostgreSQL database.
-- **Genome Codex:** An in-game interactive database of amino acid properties and codon combinations.
+Synthetica is built using a modern, decoupled microservices architecture designed for cloud deployment.
+
+### Frontend
+- **Framework:** Next.js (App Router), React
+- **Language:** TypeScript
+- **State Management:** Zustand
+- **Styling & Animations:** CSS Modules, Framer Motion
+
+### Backend
+- **Framework:** Python, Flask
+- **Database ORM:** SQLAlchemy
+- **Driver:** pg8000 (Pure-Python PostgreSQL driver)
+
+### Infrastructure
+- **Containerization:** Docker (Multi-stage builds for optimized image sizes)
+- **Database:** Azure Database for PostgreSQL (Flexible Server)
+- **Hosting:** Azure Container Apps (Serverless containers) & Azure Container Registry
 
 ## 🚀 Running Locally
 
-You can run both the frontend and backend locally for development.
+To run the project locally for development or contribution:
 
-### 1. Start the Flask Backend
-The backend runs on Python and uses a local SQLite database by default when running locally.
+### 1. Backend Setup
+The backend requires Python 3.9+ and runs using a local SQLite database by default when running locally.
 
 ```bash
 cd backend
 python -m venv venv
-# Windows: venv\Scripts\activate | Mac/Linux: source venv/bin/activate
+
+# Activate virtual environment
+# Windows: venv\Scripts\activate
+# Mac/Linux: source venv/bin/activate
+
 pip install -r requirements.txt
 python app.py
 ```
-*The API will start on `http://localhost:5000`.*
+*The Flask API will start on `http://localhost:5000`.*
 
-### 2. Start the Next.js Frontend
-In a new terminal window, start the frontend development server:
+### 2. Frontend Setup
+In a new terminal window, install the Node dependencies and start the Next.js development server:
 
 ```bash
 npm install
@@ -44,35 +63,11 @@ npm run dev
 ```
 *The game will be available at `http://localhost:3000`.*
 
-## ☁️ Azure Cloud Deployment
+## ☁️ Deployment
 
-Synthetica is fully containerized using Docker and is configured for deployment on **Azure Container Apps**.
+This project is fully containerized and designed for stateless deployment. The included `Dockerfile` in the root directory produces a highly optimized Next.js `standalone` build, while the `backend/Dockerfile` serves the Flask application via Gunicorn.
 
-### Prerequisites
-- Docker Desktop installed locally
-- An active Azure Subscription
-- An Azure Container Registry (e.g., `syntheicaregistry`)
+Both services are configured to run seamlessly on **Azure Container Apps** or any standard Kubernetes/Docker environment.
 
-### Deploying the Backend
-1. Build the backend image:
-   ```bash
-   cd backend
-   docker build -t <your-registry-url>/backend:v1 .
-   ```
-2. Push the image:
-   ```bash
-   docker push <your-registry-url>/backend:v1
-   ```
-3. Deploy to Azure Container Apps, exposing port `5000` and setting the `DATABASE_URL` environment variable to your Azure PostgreSQL instance.
-
-### Deploying the Frontend
-The frontend requires the backend API URL at build time.
-1. Build the frontend image from the root directory:
-   ```bash
-   docker build --build-arg NEXT_PUBLIC_API_URL=https://<your-backend-app-url>/api -t <your-registry-url>/frontend:v1 .
-   ```
-2. Push the image:
-   ```bash
-   docker push <your-registry-url>/frontend:v1
-   ```
-3. Deploy to Azure Container Apps, exposing port `3000`.
+## 📜 License
+This project was built for educational and portfolio purposes. Feel free to fork, explore the code, and submit pull requests!
