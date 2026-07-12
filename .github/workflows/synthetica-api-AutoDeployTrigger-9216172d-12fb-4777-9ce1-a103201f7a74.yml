@@ -35,15 +35,12 @@ jobs:
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}/backend
-          _dockerfilePathKey_: _dockerfilePath_
-          _targetLabelKey_: _targetLabel_
+          dockerfilePath: Dockerfile
           registryUrl: syntheicaregistry-gkc0bafwe2h4h5ct.azurecr.io
           registryUsername: ${{ secrets.SYNTHETICAAPI_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.SYNTHETICAAPI_REGISTRY_PASSWORD }}
           containerAppName: synthetica-api
           resourceGroup: synthetica-rg
           imageToBuild: syntheicaregistry-gkc0bafwe2h4h5ct.azurecr.io/synthetica-api:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
 
 
