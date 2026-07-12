@@ -183,9 +183,9 @@ export default function LandingPage() {
                 <Image
                   src="/logo.png"
                   alt="Synthetica Logo"
-                  width={400}
-                  height={300}
-                  style={{ objectFit: 'contain' }}
+                  width={500}
+                  height={500}
+                  style={{ objectFit: 'contain', maxHeight: '40vh' }}
                   priority
                 />
               </div>
