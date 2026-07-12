@@ -180,26 +180,20 @@
   gap: var(--space-md);
 }
 
-.title {
-  font-family: var(--font-mono);
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: 12px;
-  line-height: 1;
-}
-
-.titleAccent {
-  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-green) 50%, var(--accent-cyan) 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shift 3s ease-in-out infinite;
+.logoContainer {
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* subtle glow behind logo */
+  filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.2));
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .subtitle {

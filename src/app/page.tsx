@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import CodexModal from '../components/genome-editor/CodexModal';
 import styles from './page.module.css';
 
@@ -178,9 +179,16 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              <h1 className={styles.title}>
-                <span className={styles.titleAccent}>SYNTHETICA</span>
-              </h1>
+              <div className={styles.logoContainer}>
+                <Image
+                  src="/logo.png"
+                  alt="Synthetica Logo"
+                  width={400}
+                  height={300}
+                  style={{ objectFit: 'contain' }}
+                  priority
+                />
+              </div>
               <p className={styles.subtitle}>THE GENOME EDITOR</p>
               <p className={styles.tagline}>
                 Splice. Mutate. Survive.
