@@ -76,6 +76,3 @@ The frontend requires the backend API URL at build time.
    docker push <your-registry-url>/frontend:v1
    ```
 3. Deploy to Azure Container Apps, exposing port `3000`.
-
-## 📜 License
-This project is for educational and portfolio purposes.
