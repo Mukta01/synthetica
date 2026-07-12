@@ -1,6 +1,7 @@
 'use client';
 
 import { use, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { getPuzzle, getEnvironmentForPuzzle } from '../../../../data/puzzles';
@@ -87,8 +88,9 @@ export default function PuzzlePage({
           </span>
           <span className={styles.puzzleTitle}>{puzzle.name}</span>
         </div>
-        <div className={styles.topBarRight}>
+        <div className={styles.topBarRight} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span className={styles.offlineTag}>⚡ OFFLINE</span>
+          <Image src="/logo.png" alt="Synthetica Logo" width={32} height={32} style={{ objectFit: 'contain' }} />
         </div>
       </motion.div>
 

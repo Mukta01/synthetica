@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllEnvironments } from '../../data/puzzles';
@@ -131,8 +132,11 @@ export default function LeaderboardPage() {
         <button className={styles.backBtn} onClick={() => router.push('/lab')}>
           ← LAB
         </button>
-        <div className={styles.headerCenter}>
-          <h1 className={styles.title}>📊 GLOBAL LEADERBOARD</h1>
+        <div className={styles.headerCenter} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Image src="/logo.png" alt="Synthetica Logo" width={32} height={32} style={{ objectFit: 'contain' }} />
+            <h1 className={styles.title}>GLOBAL LEADERBOARD</h1>
+          </div>
           <p className={styles.subtitle}>Most efficient mutations worldwide</p>
         </div>
         <div className={styles.headerRight}>

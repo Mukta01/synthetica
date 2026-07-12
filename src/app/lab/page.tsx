@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { getAllEnvironments } from '../../data/puzzles';
@@ -39,7 +40,10 @@ export default function LabPage() {
           ← TERMINAL
         </button>
         <div className={styles.headerCenter}>
-          <h1 className={styles.headerTitle}>RESEARCH LAB</h1>
+          <div className={styles.headerTitleGroup}>
+            <Image src="/logo.png" alt="Synthetica Logo" width={40} height={40} style={{ objectFit: 'contain' }} />
+            <h1 className={styles.headerTitle}>RESEARCH LAB</h1>
+          </div>
           <p className={styles.headerSubtitle}>Select an environment to begin genome engineering</p>
         </div>
         <button className={styles.leaderboardButton} onClick={() => router.push('/leaderboard')}>
