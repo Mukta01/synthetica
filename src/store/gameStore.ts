@@ -6,6 +6,7 @@
 import { create } from 'zustand';
 import type { Puzzle, Mutation, MutationType, CompilationResult } from '../lib/types';
 import { evaluateSequenceOffline } from '../lib/offlineEvaluator';
+import { checkApiHealth, evaluateSequence } from '../lib/api';
 
 interface GameState {
   // Puzzle
@@ -253,13 +254,34 @@ export const useGameStore = create<GameState>((set, get) => ({
     // Simulate compilation time for animation
     await new Promise(resolve => setTimeout(resolve, 6000));
 
-    // Use offline evaluator
-    const result = evaluateSequenceOffline(
-      currentPuzzle,
-      currentSequence,
-      mutationLog,
-      elapsedSeconds
-    );
+    let result: CompilationResult;
+
+    try {
+      const isOnline = await checkApiHealth();
+      if (isOnline) {
+        const response = await evaluateSequence({
+          puzzleId: currentPuzzle.id,
+          sequence: currentSequence,
+          mutations: mutationLog,
+          timeSeconds: elapsedSeconds,
+        });
+        if (response.success) {
+          result = response.result;
+        } else {
+          throw new Error('API evaluation failed');
+        }
+      } else {
+        throw new Error('API offline');
+      }
+    } catch (err) {
+      console.warn('Backend evaluation unavailable, falling back to offline evaluator:', err);
+      result = evaluateSequenceOffline(
+        currentPuzzle,
+        currentSequence,
+        mutationLog,
+        elapsedSeconds
+      );
+    }
 
     set({
       isCompiling: false,

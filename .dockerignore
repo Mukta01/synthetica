@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.vscode
+backend/venv
+__pycache__
+*.db
+.env
+.env.*
+.DS_Store
+Dockerfile
+.dockerignore
