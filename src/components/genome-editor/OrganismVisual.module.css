@@ -1,98 +1,200 @@
+/* ============================================
+   ORGANISM VISUAL — Animated Microbe
+   ============================================ */
+
 .container {
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 300px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--border-active);
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
   margin-bottom: var(--space-lg);
 }
 
+/* ---- Environment Backgrounds ---- */
+.envMagma {
+  background: 
+    radial-gradient(ellipse at 30% 80%, rgba(255, 80, 0, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 90%, rgba(255, 40, 0, 0.25) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(80, 20, 0, 0.8) 0%, transparent 70%),
+    linear-gradient(180deg, #1a0800 0%, #2d0f00 40%, #4a1500 100%);
+}
+
+.envDeepsea {
+  background: 
+    radial-gradient(ellipse at 50% 100%, rgba(0, 80, 200, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 60%, rgba(0, 40, 120, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #000a1a 0%, #001030 40%, #001848 100%);
+}
+
+.envAcid {
+  background: 
+    radial-gradient(ellipse at 40% 90%, rgba(100, 255, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(80, 200, 0, 0.1) 0%, transparent 40%),
+    linear-gradient(180deg, #060d00 0%, #0d1a00 40%, #162d00 100%);
+}
+
+.envDefault {
+  background: var(--bg-elevated);
+}
+
+/* ---- Environment Label ---- */
 .environmentLabel {
   position: absolute;
-  top: var(--space-md);
+  top: var(--space-sm);
   left: var(--space-md);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
   letter-spacing: 2px;
   z-index: 10;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
 }
 
-/* Base Organism styles */
-.organism {
+/* ---- Status Badge ---- */
+.statusBadge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  z-index: 10;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.statusHealthy {
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.statusDistressed {
+  color: #ff3366;
+  background: rgba(255, 51, 102, 0.1);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  animation: statusPulse 1s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ---- Organism Body ---- */
+.organismWrapper {
   position: relative;
-  width: 120px;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-  transition: all 0.5s ease-in-out;
-}
-
-.core {
-  position: absolute;
-  width: 60%;
-  height: 60%;
-  background: var(--bg-surface);
-  border-radius: 50%;
-  z-index: 2;
+  width: 160px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.nucleus {
-  width: 40%;
-  height: 40%;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-}
-
-.membrane {
+/* ---- SVG Creature ---- */
+.creatureSvg {
   position: absolute;
-  top: -10%;
-  left: -10%;
-  right: -10%;
-  bottom: -10%;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  z-index: 1;
-  opacity: 0.8;
-  mix-blend-mode: screen;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  filter: drop-shadow(0 0 12px var(--creature-glow, rgba(0, 229, 255, 0.3)));
+  transition: filter 0.5s ease;
 }
 
-.aura {
-  position: absolute;
-  top: -30%;
-  left: -30%;
-  right: -30%;
-  bottom: -30%;
-  border-radius: 50%;
-  z-index: 0;
-  opacity: 0.4;
-  filter: blur(15px);
+/* ---- Eyes ---- */
+.eyeGroup {
+  transition: transform 0.3s ease;
 }
 
-/* Distressed State */
-.distressed {
-  animation: shake 0.2s infinite ease-in-out alternate;
+.pupil {
+  transition: all 0.4s ease;
 }
 
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  100% { transform: translate(-1px, -2px) rotate(-1deg); }
+/* ---- Tentacles ---- */
+.tentacle {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.7;
+  transition: stroke 0.5s ease, stroke-width 0.5s ease;
 }
 
-/* Environment Effects */
-.particle {
+/* ---- Trait Aura Rings ---- */
+.auraRing {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  transition: all 0.6s ease;
+}
+
+.heatAura {
+  border: 2px solid rgba(255, 100, 30, 0.4);
+  box-shadow: 0 0 15px rgba(255, 80, 0, 0.2), inset 0 0 15px rgba(255, 80, 0, 0.1);
+}
+
+.hydroAura {
+  border: 2px solid rgba(0, 150, 255, 0.3);
+  box-shadow: 0 0 12px rgba(0, 120, 255, 0.15), inset 0 0 12px rgba(0, 120, 255, 0.1);
+}
+
+.toxinAura {
+  border: 2px solid rgba(0, 255, 100, 0.3);
+  box-shadow: 0 0 12px rgba(0, 200, 80, 0.15), inset 0 0 12px rgba(0, 200, 80, 0.1);
+}
+
+/* ---- Floating Particles ---- */
+.particlesLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.floatingParticle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatUp 6s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  20% { opacity: 0.6; transform: translateY(-20px) scale(1); }
+  80% { opacity: 0.3; }
+  100% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+}
+
+/* ---- Feedback Toast ---- */
+.feedbackToast {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  z-index: 20;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.feedbackPositive {
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.feedbackNegative {
+  color: #ff3366;
+  background: rgba(255, 51, 102, 0.15);
+  border: 1px solid rgba(255, 51, 102, 0.3);
 }
