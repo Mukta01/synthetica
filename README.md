@@ -7,6 +7,9 @@
 
 Synthetica is an interactive, educational puzzle game where players take on the role of a genetic engineer. By synthesizing custom DNA sequences, players design proteins capable of surviving in extreme, simulated alien environments. 
 
+## 📖 How to Play
+New to genetics? Don't worry! Read the **[Beginner's Guide & How to Play](HOW_TO_PLAY.md)** to learn how DNA codons translate into amino acids, and how you can mutate sequences to win! 
+
 ## ✨ Key Features
 
 - **Real-Time DNA Translation Engine:** Client-side evaluation translates DNA codons into amino acid chains in real time, calculating molecular traits like heat stability, hydrophobicity, and toxin resistance.
