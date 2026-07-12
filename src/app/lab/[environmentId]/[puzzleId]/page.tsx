@@ -8,6 +8,7 @@ import { useGameStore } from '../../../../store/gameStore';
 import SequenceEditor from '../../../../components/genome-editor/SequenceEditor';
 import MutationToolbar from '../../../../components/genome-editor/MutationToolbar';
 import ProteinPreview from '../../../../components/genome-editor/ProteinPreview';
+import OrganismVisual from '../../../../components/genome-editor/OrganismVisual';
 import PuzzleBriefing from '../../../../components/genome-editor/PuzzleBriefing';
 import CompileAnimation from '../../../../components/genome-editor/CompileAnimation';
 import ResultModal from '../../../../components/genome-editor/ResultModal';
@@ -132,13 +133,14 @@ export default function PuzzlePage({
           </div>
         </motion.div>
 
-        {/* Right Panel: Protein Preview */}
+        {/* Right Panel: Protein Preview & Organism */}
         <motion.div
           className={styles.rightPanel}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
         >
+          <OrganismVisual />
           <ProteinPreview />
         </motion.div>
       </div>

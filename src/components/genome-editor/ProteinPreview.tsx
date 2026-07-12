@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
 import { translateSequence, calculateTraits, AMINO_ACID_PROPERTIES } from '../../lib/bioUtils';
 import styles from './ProteinPreview.module.css';
@@ -23,31 +23,43 @@ export default function ProteinPreview() {
       <div className={styles.section}>
         <span className={styles.sectionLabel}>AMINO ACID CHAIN</span>
         <div className={styles.aaChain}>
-          {aminoAcids.length > 0 ? (
-            aminoAcids.map((aa, i) => {
-              const props = AMINO_ACID_PROPERTIES[aa];
-              return (
-                <motion.div
-                  key={`${i}-${aa}`}
-                  className={styles.aaBubble}
-                  style={{
-                    background: `${props?.color || '#666'}20`,
-                    borderColor: `${props?.color || '#666'}60`,
-                    color: props?.color || '#666',
-                  }}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.05, duration: 0.2 }}
-                  title={`${props?.name || 'Unknown'} (${aa})`}
-                >
-                  <span className={styles.aaShort}>{props?.shortName || '?'}</span>
-                  <span className={styles.aaName}>{aa}</span>
-                </motion.div>
-              );
-            })
-          ) : (
-            <span className={styles.noData}>No valid codons</span>
-          )}
+          <AnimatePresence mode="popLayout">
+            {aminoAcids.length > 0 ? (
+              aminoAcids.map((aa, i) => {
+                const props = AMINO_ACID_PROPERTIES[aa];
+                return (
+                  <motion.div
+                    key={`${i}-${aa}`}
+                    layout="position"
+                    className={styles.aaBubble}
+                    style={{
+                      background: `${props?.color || '#666'}20`,
+                      borderColor: `${props?.color || '#666'}60`,
+                      color: props?.color || '#666',
+                    }}
+                    initial={{ opacity: 0, scale: 0.5, y: -20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, filter: "blur(5px)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    title={`${props?.name || 'Unknown'} (${aa})`}
+                  >
+                    <span className={styles.aaShort}>{props?.shortName || '?'}</span>
+                    <span className={styles.aaName}>{aa}</span>
+                  </motion.div>
+                );
+              })
+            ) : (
+              <motion.span 
+                key="empty" 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                exit={{ opacity: 0 }} 
+                className={styles.noData}
+              >
+                No valid codons
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
