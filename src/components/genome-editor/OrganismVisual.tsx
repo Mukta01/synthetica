@@ -87,9 +87,10 @@ export default function OrganismVisual() {
   // ---- Body color morphing ----
   // Healthy: vivid saturated colors that shift with traits
   // Distressed: desaturated, darker
-  const bodyHue = 170 + (heatLevel * 1.2) - (toxinLevel * 0.4);
-  const bodySat = isHealthy ? 70 + (membraneLevel * 0.2) : 25;
-  const bodyLight = isHealthy ? 50 : 25;
+  // Base color is a decent vibrant purple/pink (Capsule theme)
+  const bodyHue = 270 + (heatLevel * 0.6) - (toxinLevel * 0.4);
+  const bodySat = isHealthy ? 75 + (membraneLevel * 0.15) : 30;
+  const bodyLight = isHealthy ? 55 : 30;
   const bodyColor = `hsl(${bodyHue}, ${bodySat}%, ${bodyLight}%)`;
   const bodyColorLight = `hsl(${bodyHue}, ${bodySat}%, ${bodyLight + 18}%)`;
   const bodyColorDark = `hsl(${bodyHue}, ${bodySat}%, ${Math.max(10, bodyLight - 12)}%)`;
@@ -97,17 +98,12 @@ export default function OrganismVisual() {
     ? `rgba(0, 255, 170, 0.5)`
     : `rgba(255, 50, 80, 0.35)`;
 
-  // ---- Tentacle configs (8 tentacles, spread all around) ----
-  const tentacles = [
-    { angle: -30, length: 45, delay: 0, thickness: 4 },
-    { angle: -60, length: 38, delay: 0.4, thickness: 3.5 },
-    { angle: -100, length: 35, delay: 0.8, thickness: 3 },
-    { angle: 30, length: 42, delay: 0.2, thickness: 4 },
-    { angle: 60, length: 36, delay: 0.6, thickness: 3.5 },
-    { angle: 100, length: 33, delay: 1.0, thickness: 3 },
-    { angle: 155, length: 40, delay: 0.3, thickness: 3.5 },
-    { angle: -155, length: 37, delay: 0.7, thickness: 3 },
-  ];
+  // ---- Cilia configs (many small hairs around the capsule) ----
+  const ciliaCount = 36;
+  const cilia = Array.from({ length: ciliaCount }).map((_, i) => {
+    const angle = (i * 360) / ciliaCount;
+    return { angle, delay: (i * 0.1) % 1, length: 6 + Math.random() * 4, thickness: 1.5 };
+  });
 
   // ---- Animation speeds ----
   const breathDuration = isHealthy ? 3.5 : 0.5;
@@ -227,80 +223,78 @@ export default function OrganismVisual() {
             </filter>
           </defs>
 
-          {/* Tentacles */}
-          {tentacles.map((t, i) => {
+          {/* Flagella (Tail) */}
+          <motion.path
+            d="M 100 155 Q 85 180 100 210"
+            fill="none"
+            stroke={bodyColorDark}
+            strokeWidth="4.5"
+            strokeLinecap="round"
+            animate={{
+              d: [
+                "M 100 155 Q 85 180 100 210",
+                "M 100 155 Q 115 180 100 215",
+                "M 100 155 Q 75 180 100 205",
+                "M 100 155 Q 85 180 100 210"
+              ]
+            }}
+            transition={{
+              duration: wobbleDuration * 0.25,
+              repeat: Infinity,
+              ease: 'easeInOut'
+            }}
+          />
+
+          {/* Cilia */}
+          {cilia.map((c, i) => {
+            const rad = (c.angle * Math.PI) / 180;
+            // Approximate the capsule shape (rx=35, ry=60)
+            const rx = 35;
+            const ry = 60;
             const cx = 100;
             const cy = 100;
-            const rad = (t.angle * Math.PI) / 180;
-            const startX = cx + Math.cos(rad) * 48;
-            const startY = cy + Math.sin(rad) * 48;
-            const endX = cx + Math.cos(rad) * (48 + t.length);
-            const endY = cy + Math.sin(rad) * (48 + t.length);
-            const cpX = cx + Math.cos(rad + 0.3) * (48 + t.length * 0.6);
-            const cpY = cy + Math.sin(rad + 0.3) * (48 + t.length * 0.6);
-
+            // Parametric ellipse point to distribute cilia
+            const startX = cx + Math.cos(rad) * rx;
+            const startY = cy + Math.sin(rad) * ry;
+            const endX = cx + Math.cos(rad) * (rx + c.length);
+            const endY = cy + Math.sin(rad) * (ry + c.length);
+            
             return (
-              <motion.path
-                key={i}
-                className={styles.tentacle}
-                d={`M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`}
-                stroke={bodyColor}
-                strokeWidth={t.thickness}
+              <motion.line
+                key={`cilia-${i}`}
+                x1={startX} y1={startY}
+                x2={endX} y2={endY}
+                stroke={bodyColorLight}
+                strokeWidth={c.thickness}
+                strokeLinecap="round"
                 animate={{
-                  d: [
-                    `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`,
-                    `M ${startX} ${startY} Q ${cpX + 10} ${cpY - 10} ${endX + 6} ${endY - 6}`,
-                    `M ${startX} ${startY} Q ${cpX - 7} ${cpY + 7} ${endX - 4} ${endY + 4}`,
-                    `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`,
-                  ],
+                  x2: [endX, endX + Math.cos(rad + 1) * 3, endX - Math.cos(rad - 1) * 2, endX],
+                  y2: [endY, endY + Math.sin(rad + 1) * 3, endY - Math.sin(rad - 1) * 2, endY],
                 }}
                 transition={{
-                  duration: wobbleDuration * 0.5,
+                  duration: wobbleDuration * 0.15,
                   repeat: Infinity,
                   ease: 'easeInOut',
-                  delay: t.delay,
+                  delay: c.delay
                 }}
               />
             );
           })}
 
-          {/* Tentacle tips (small dots at the ends) */}
-          {tentacles.map((t, i) => {
-            const rad = (t.angle * Math.PI) / 180;
-            const tipX = 100 + Math.cos(rad) * (48 + t.length);
-            const tipY = 100 + Math.sin(rad) * (48 + t.length);
-            return (
-              <motion.circle
-                key={`tip-${i}`}
-                cx={tipX}
-                cy={tipY}
-                r={t.thickness * 0.6}
-                fill={bodyColorLight}
-                opacity={0.7}
-                animate={{
-                  cx: [tipX, tipX + 6, tipX - 4, tipX],
-                  cy: [tipY, tipY - 6, tipY + 4, tipY],
-                }}
-                transition={{
-                  duration: wobbleDuration * 0.5,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: t.delay,
-                }}
-              />
-            );
-          })}
-
-          {/* Main Body — Organic blob shape with gradient */}
-          <motion.ellipse
-            cx="100"
-            cy="100"
+          {/* Main Body — Capsule shape */}
+          <motion.rect
+            x="65"
+            y="40"
+            width="70"
+            height="120"
+            rx="35"
+            ry="35"
             fill="url(#bodyGrad)"
             stroke={bodyColorDark}
             strokeWidth="2.5"
             animate={{
-              rx: isHealthy ? [48, 52, 46, 50, 48] : [48, 42, 54, 44, 48],
-              ry: isHealthy ? [46, 43, 50, 44, 46] : [46, 52, 40, 50, 46],
+              height: isHealthy ? [120, 116, 124, 118, 120] : [120, 126, 112, 128, 120],
+              y: isHealthy ? [40, 42, 38, 41, 40] : [40, 37, 44, 36, 40],
             }}
             transition={{
               duration: wobbleDuration,
@@ -310,17 +304,19 @@ export default function OrganismVisual() {
           />
 
           {/* Inner Body highlight (specular) */}
-          <motion.ellipse
-            cx="90"
-            cy="88"
+          <motion.rect
+            x="72"
+            y="46"
+            width="56"
+            height="108"
             rx="28"
-            ry="24"
+            ry="28"
             fill={bodyColorLight}
             opacity={0.2}
             filter="url(#softGlow)"
             animate={{
-              rx: [28, 30, 26, 29, 28],
-              ry: [24, 22, 27, 23, 24],
+              height: isHealthy ? [108, 104, 112, 106, 108] : [108, 114, 100, 116, 108],
+              y: isHealthy ? [46, 48, 44, 47, 46] : [46, 43, 50, 42, 46],
             }}
             transition={{
               duration: wobbleDuration,
@@ -331,8 +327,8 @@ export default function OrganismVisual() {
 
           {/* Small specular highlight dot */}
           <motion.circle
-            cx="82"
-            cy="78"
+            cx="78"
+            cy="55"
             r="6"
             fill="white"
             opacity={0.12}
