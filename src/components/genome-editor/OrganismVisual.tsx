@@ -225,17 +225,17 @@ export default function OrganismVisual() {
 
           {/* Flagella (Tail) */}
           <motion.path
-            d="M 100 155 Q 85 180 100 210"
+            d="M 100 145 Q 85 170 100 195"
             fill="none"
             stroke={bodyColorDark}
             strokeWidth="4.5"
             strokeLinecap="round"
             animate={{
               d: [
-                "M 100 155 Q 85 180 100 210",
-                "M 100 155 Q 115 180 100 215",
-                "M 100 155 Q 75 180 100 205",
-                "M 100 155 Q 85 180 100 210"
+                "M 100 145 Q 85 170 100 195",
+                "M 100 145 Q 115 170 100 200",
+                "M 100 145 Q 75 170 100 190",
+                "M 100 145 Q 85 170 100 195"
               ]
             }}
             transition={{
@@ -248,12 +248,10 @@ export default function OrganismVisual() {
           {/* Cilia */}
           {cilia.map((c, i) => {
             const rad = (c.angle * Math.PI) / 180;
-            // Approximate the capsule shape (rx=35, ry=60)
-            const rx = 35;
-            const ry = 60;
+            const rx = 38;
+            const ry = 62;
             const cx = 100;
-            const cy = 100;
-            // Parametric ellipse point to distribute cilia
+            const cy = 85;
             const startX = cx + Math.cos(rad) * rx;
             const startY = cy + Math.sin(rad) * ry;
             const endX = cx + Math.cos(rad) * (rx + c.length);
@@ -282,19 +280,15 @@ export default function OrganismVisual() {
           })}
 
           {/* Main Body — Capsule shape */}
-          <motion.rect
-            x="65"
-            y="40"
-            width="70"
-            height="120"
-            rx="35"
-            ry="35"
+          <motion.ellipse
+            cx="100"
+            cy="85"
             fill="url(#bodyGrad)"
             stroke={bodyColorDark}
             strokeWidth="2.5"
             animate={{
-              height: isHealthy ? [120, 116, 124, 118, 120] : [120, 126, 112, 128, 120],
-              y: isHealthy ? [40, 42, 38, 41, 40] : [40, 37, 44, 36, 40],
+              rx: isHealthy ? [38, 41, 35, 39, 38] : [38, 33, 43, 35, 38],
+              ry: isHealthy ? [62, 59, 65, 60, 62] : [62, 67, 56, 65, 62],
             }}
             transition={{
               duration: wobbleDuration,
@@ -304,19 +298,17 @@ export default function OrganismVisual() {
           />
 
           {/* Inner Body highlight (specular) */}
-          <motion.rect
-            x="72"
-            y="46"
-            width="56"
-            height="108"
+          <motion.ellipse
+            cx="90"
+            cy="73"
             rx="28"
-            ry="28"
+            ry="52"
             fill={bodyColorLight}
             opacity={0.2}
             filter="url(#softGlow)"
             animate={{
-              height: isHealthy ? [108, 104, 112, 106, 108] : [108, 114, 100, 116, 108],
-              y: isHealthy ? [46, 48, 44, 47, 46] : [46, 43, 50, 42, 46],
+              rx: [28, 30, 26, 29, 28],
+              ry: [52, 50, 54, 51, 52],
             }}
             transition={{
               duration: wobbleDuration,
@@ -327,8 +319,8 @@ export default function OrganismVisual() {
 
           {/* Small specular highlight dot */}
           <motion.circle
-            cx="78"
-            cy="55"
+            cx="80"
+            cy="60"
             r="6"
             fill="white"
             opacity={0.12}
@@ -348,17 +340,17 @@ export default function OrganismVisual() {
             transition={{ duration: 0.5, repeat: Infinity }}
           >
             {/* Eye white */}
-            <ellipse cx="86" cy="94" rx="10" ry="12" fill="white" opacity={0.95} />
+            <ellipse cx="88" cy="79" rx="10" ry="12" fill="white" opacity={0.95} />
             {/* Iris ring */}
             <motion.circle
-              cx="87"
-              cy="95"
+              cx="89"
+              cy="80"
               r="6"
               fill={isHealthy ? '#33aaff' : '#aa3344'}
               animate={
                 isHealthy
-                  ? { cx: [87, 88, 86, 87], cy: [95, 94, 96, 95] }
-                  : { cx: [87, 90, 84, 87], cy: [95, 97, 93, 95] }
+                  ? { cx: [89, 90, 88, 89], cy: [80, 79, 81, 80] }
+                  : { cx: [89, 92, 86, 89], cy: [80, 82, 78, 80] }
               }
               transition={{
                 duration: isHealthy ? 4.5 : 0.8,
@@ -369,14 +361,14 @@ export default function OrganismVisual() {
             {/* Pupil */}
             <motion.circle
               className={styles.pupil}
-              cx="87"
-              cy="95"
+              cx="89"
+              cy="80"
               r={isHealthy ? 3.5 : 2.5}
               fill="#111"
               animate={
                 isHealthy
-                  ? { cx: [87, 88, 86, 87], cy: [95, 94, 96, 95] }
-                  : { cx: [87, 90, 84, 87], cy: [95, 97, 93, 95] }
+                  ? { cx: [89, 90, 88, 89], cy: [80, 79, 81, 80] }
+                  : { cx: [89, 92, 86, 89], cy: [80, 82, 78, 80] }
               }
               transition={{
                 duration: isHealthy ? 4.5 : 0.8,
@@ -385,7 +377,7 @@ export default function OrganismVisual() {
               }}
             />
             {/* Eye shine */}
-            <circle cx="84" cy="91" r="2" fill="white" opacity={0.85} />
+            <circle cx="86" cy="76" r="2" fill="white" opacity={0.85} />
           </motion.g>
 
           {/* ---- RIGHT EYE ---- */}
@@ -398,16 +390,16 @@ export default function OrganismVisual() {
             }
             transition={{ duration: 0.5, repeat: Infinity }}
           >
-            <ellipse cx="114" cy="94" rx="10" ry="12" fill="white" opacity={0.95} />
+            <ellipse cx="112" cy="79" rx="10" ry="12" fill="white" opacity={0.95} />
             <motion.circle
-              cx="115"
-              cy="95"
+              cx="113"
+              cy="80"
               r="6"
               fill={isHealthy ? '#33aaff' : '#aa3344'}
               animate={
                 isHealthy
-                  ? { cx: [115, 116, 114, 115], cy: [95, 94, 96, 95] }
-                  : { cx: [115, 118, 112, 115], cy: [95, 97, 93, 95] }
+                  ? { cx: [113, 114, 112, 113], cy: [80, 79, 81, 80] }
+                  : { cx: [113, 116, 110, 113], cy: [80, 82, 78, 80] }
               }
               transition={{
                 duration: isHealthy ? 4.5 : 0.8,
@@ -417,14 +409,14 @@ export default function OrganismVisual() {
             />
             <motion.circle
               className={styles.pupil}
-              cx="115"
-              cy="95"
+              cx="113"
+              cy="80"
               r={isHealthy ? 3.5 : 2.5}
               fill="#111"
               animate={
                 isHealthy
-                  ? { cx: [115, 116, 114, 115], cy: [95, 94, 96, 95] }
-                  : { cx: [115, 118, 112, 115], cy: [95, 97, 93, 95] }
+                  ? { cx: [113, 114, 112, 113], cy: [80, 79, 81, 80] }
+                  : { cx: [113, 116, 110, 113], cy: [80, 82, 78, 80] }
               }
               transition={{
                 duration: isHealthy ? 4.5 : 0.8,
@@ -432,31 +424,31 @@ export default function OrganismVisual() {
                 ease: 'easeInOut',
               }}
             />
-            <circle cx="112" cy="91" r="2" fill="white" opacity={0.85} />
+            <circle cx="110" cy="76" r="2" fill="white" opacity={0.85} />
           </motion.g>
 
           {/* ---- MOUTH ---- */}
           {isHealthy ? (
             // Big happy smile
             <motion.path
-              d="M 88 110 Q 100 124 112 110"
+              d="M 88 95 Q 100 109 112 95"
               fill="none"
               stroke="#222"
               strokeWidth="2.5"
               strokeLinecap="round"
-              animate={{ d: ['M 88 110 Q 100 124 112 110', 'M 87 111 Q 100 126 113 111', 'M 88 110 Q 100 124 112 110'] }}
+              animate={{ d: ['M 88 95 Q 100 109 112 95', 'M 87 96 Q 100 111 113 96', 'M 88 95 Q 100 109 112 95'] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
           ) : (
             // Worried wobbly mouth
             <motion.path
-              d="M 90 116 Q 100 106 110 116"
+              d="M 90 101 Q 100 91 110 101"
               fill="none"
               stroke="#444"
               strokeWidth="2"
               strokeLinecap="round"
               animate={{
-                d: ['M 90 116 Q 100 106 110 116', 'M 91 117 Q 100 103 109 117', 'M 90 116 Q 100 106 110 116'],
+                d: ['M 90 101 Q 100 91 110 101', 'M 91 102 Q 100 88 109 102', 'M 90 101 Q 100 91 110 101'],
               }}
               transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut' }}
             />
@@ -466,14 +458,14 @@ export default function OrganismVisual() {
           {isHealthy && (
             <>
               <motion.ellipse
-                cx="74" cy="106" rx="7" ry="5"
+                cx="74" cy="91" rx="7" ry="5"
                 fill="#ff7799"
                 opacity={0.2}
                 animate={{ opacity: [0.12, 0.28, 0.12], rx: [7, 8, 7] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               />
               <motion.ellipse
-                cx="126" cy="106" rx="7" ry="5"
+                cx="126" cy="91" rx="7" ry="5"
                 fill="#ff7799"
                 opacity={0.2}
                 animate={{ opacity: [0.12, 0.28, 0.12], rx: [7, 8, 7] }}
@@ -484,11 +476,11 @@ export default function OrganismVisual() {
 
           {/* ---- INTERNAL ORGANELLES (little floating circles inside body) ---- */}
           {[
-            { cx: 108, cy: 115, r: 4, delay: 0 },
-            { cx: 92, cy: 118, r: 3, delay: 0.5 },
-            { cx: 100, cy: 78, r: 3.5, delay: 1 },
-            { cx: 80, cy: 100, r: 2.5, delay: 1.5 },
-            { cx: 118, cy: 102, r: 2.5, delay: 0.8 },
+            { cx: 108, cy: 100, r: 4, delay: 0 },
+            { cx: 92, cy: 103, r: 3, delay: 0.5 },
+            { cx: 100, cy: 63, r: 3.5, delay: 1 },
+            { cx: 80, cy: 85, r: 2.5, delay: 1.5 },
+            { cx: 118, cy: 87, r: 2.5, delay: 0.8 },
           ].map((org, i) => (
             <motion.circle
               key={`organelle-${i}`}
